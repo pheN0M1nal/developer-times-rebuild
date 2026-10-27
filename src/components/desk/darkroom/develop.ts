@@ -26,8 +26,8 @@ function lut(points?: Curve) {
 /** Separable box blur on a single-channel float buffer, repeated for a gaussian-ish result. */
 function blur(src: Float32Array, w: number, h: number, radius: number) {
   const tmp = new Float32Array(src.length);
-  let a = src;
-  let b = tmp;
+  const a = src;
+  const b = tmp;
   const r = Math.max(1, Math.round(radius));
   for (let pass = 0; pass < 3; pass++) {
     for (let y = 0; y < h; y++) {

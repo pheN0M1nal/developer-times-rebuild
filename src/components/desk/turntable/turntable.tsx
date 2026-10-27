@@ -63,6 +63,7 @@ export function Turntable() {
   const audio = useRef<HTMLAudioElement | null>(null);
   const crackle = useRef<SurfaceNoise | null>(null);
   const dragArm = useRef(false);
+  const [dragging, setDragging] = useState(false);
 
   const needleDown = angle >= LEAD_IN - 1;
   const grit = Math.max(0, Math.min(1, (angle - LEAD_IN) / (RUN_OUT - LEAD_IN)));
@@ -137,6 +138,7 @@ export function Turntable() {
   // Tonearm: pivot is at the top right of the deck.
   const onArmDown = (e: React.PointerEvent) => {
     dragArm.current = true;
+    setDragging(true);
     (e.target as Element).setPointerCapture(e.pointerId);
   };
   const onArmMove = (e: React.PointerEvent) => {
@@ -149,6 +151,7 @@ export function Turntable() {
   };
   const onArmUp = () => {
     dragArm.current = false;
+    setDragging(false);
   };
 
   const toggleFull = async () => {
@@ -170,7 +173,7 @@ export function Turntable() {
         <div>
           <div
             ref={deck}
-            className={cn("relative mx-auto aspect-square w-full max-w-[38rem] select-none", over && "outline outline-2 outline-dashed outline-[var(--rust)] outline-offset-8")}
+            className={cn("relative ml-0 mr-auto aspect-square w-[82%] max-w-[38rem] select-none sm:mx-auto sm:w-full", over && "outline outline-2 outline-dashed outline-[var(--rust)] outline-offset-8")}
             onDragOver={(e) => {
               e.preventDefault();
               setOver(true);
@@ -216,7 +219,7 @@ export function Turntable() {
 
             {/* Tonearm */}
             <svg viewBox="0 0 100 100" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible" aria-hidden>
-              <g style={{ transformOrigin: "93px 7px", transform: `rotate(${angle}deg)`, transition: dragArm.current ? "none" : "transform 0.6s cubic-bezier(0.22,0.68,0.28,1)" }}>
+              <g style={{ transformOrigin: "93px 7px", transform: `rotate(${angle}deg)`, transition: dragging ? "none" : "transform 0.6s cubic-bezier(0.22,0.68,0.28,1)" }}>
                 <line x1="93" y1="7" x2="86" y2="52" stroke="#8a7a5e" strokeWidth="1.4" strokeLinecap="round" />
                 <line x1="93" y1="7" x2="86" y2="52" stroke="#d8c8a2" strokeWidth="0.4" strokeLinecap="round" />
                 <rect x="83.2" y="51" width="5" height="7" rx="1" fill="#5a4e3e" transform="rotate(-8 86 54)" />

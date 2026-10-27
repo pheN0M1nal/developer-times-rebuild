@@ -106,7 +106,7 @@ export function Dossier({ c, testimonies }: { c: CaseFile; testimonies: Endorsem
 
   return (
     <>
-      <div ref={sheet} className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] bg-background">
+      <div ref={sheet} className="grid grid-cols-[minmax(0,1fr)] gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] bg-background">
         <aside className="space-y-6 self-start md:sticky md:top-28">
           <figure className="border border-foreground/40 p-2">
             <div className="relative aspect-[4/3] overflow-hidden border border-foreground/10 text-foreground">
@@ -180,7 +180,7 @@ export function Dossier({ c, testimonies }: { c: CaseFile; testimonies: Endorsem
               <ClueChip done={clues.lead}>{clues.lead ? "Lead noted: summary recorded" : "Lead pending: read the statement"}</ClueChip>
             </div>
             <div ref={summary} className="mt-6 border-l border-foreground/30 pl-6">
-              <p className="drop-cap font-serif text-[1rem] leading-relaxed text-justify text-foreground">{c.summary}</p>
+              <p className="drop-cap font-serif text-[1rem] leading-relaxed text-left sm:text-justify [hyphens:auto] text-foreground">{c.summary}</p>
             </div>
             <p className="mt-6 flex items-center gap-3 type-label text-[0.6rem] text-muted-foreground before:h-px before:flex-1 before:bg-foreground/20 after:h-px after:flex-1 after:bg-foreground/20">
               — Lead Investigator · Filed Under: Digital Investigations

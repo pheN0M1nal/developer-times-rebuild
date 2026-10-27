@@ -34,11 +34,11 @@ export default function TermsPage() {
           </div>
 
           <Heading n="I">Copyright &amp; Ownership</Heading>
-          <p className="drop-cap text-justify">
+          <p className="drop-cap text-left sm:text-justify [hyphens:auto]">
             Articles, case studies, photographs and written materials published in The Developer Times belong to their author. This edition is a
             challenge rebuild, and every name, quote and figure in it is a placeholder standing in for the real thing.
           </p>
-          <p className="mt-4 text-justify">
+          <p className="mt-4 text-left sm:text-justify [hyphens:auto]">
             The photographs are generated, the people quoted are invented, and the records on the shelf were never pressed. Any resemblance to
             persons living, dead, or currently on call is entirely coincidental.
           </p>
@@ -62,20 +62,20 @@ export default function TermsPage() {
           </div>
 
           <Heading n="III">Third-Party Material</Heading>
-          <p className="text-justify">
+          <p className="text-left sm:text-justify [hyphens:auto]">
             Fonts are used under the SIL Open Font License. Live radio on the desk is streamed from SomaFM and remains theirs; Spotify embeds play
             under Spotify&apos;s own terms. Nothing on the desk uploads your files: invoices, letters and photographs are made in your browser and stay
             there.
           </p>
 
           <Heading n="IV">Privacy</Heading>
-          <p className="text-justify">
+          <p className="text-left sm:text-justify [hyphens:auto]">
             The site keeps a few small notes in your browser&apos;s storage — the theme you chose, whether the torch is lit, which secrets you have
             found, and the state of the pocket-watch. They never leave your device. Clear your site data and the bureau forgets you were here.
           </p>
 
           <Heading n="V">Correspondence</Heading>
-          <p className="text-justify">
+          <p className="text-left sm:text-justify [hyphens:auto]">
             For anything else, write to{" "}
             <a href={`mailto:${persona.email}`} className="underline underline-offset-4">
               {persona.email}

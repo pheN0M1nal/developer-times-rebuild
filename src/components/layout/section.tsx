@@ -60,7 +60,7 @@ export function Section({
       className={cn(
         "uppercase absolute leading-none font-bold font-serif text-foreground/10 md:text-foreground/5 -z-10 select-none pointer-events-none",
         "text-[86px] sm:text-[150px] md:text-[200px]",
-        fullWidth ? "-top-10 -right-2" : "top-10 sm:top-0 right-0",
+        fullWidth ? "-top-10 right-0 md:-right-2" : "top-10 sm:top-0 right-0",
         decorativeTextClassName,
       )}
     >

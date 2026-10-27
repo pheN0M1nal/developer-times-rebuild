@@ -54,10 +54,10 @@ export function FrontPage() {
         <article className="min-w-0">
           <h2 className="font-serif font-bold text-2xl md:text-[2rem] leading-tight text-foreground">{hero.headline}</h2>
           <p className="mt-2 font-serif italic text-sm text-muted-foreground">{hero.deck}</p>
-          <p className="drop-cap mt-6 font-serif text-[0.95rem] leading-relaxed text-justify text-foreground">
+          <p className="drop-cap mt-6 font-serif text-[0.95rem] leading-relaxed text-left sm:text-justify [hyphens:auto] text-foreground">
             {torchEnabled ? hero.ledeTorch : hero.lede}
           </p>
-          <p className="mt-4 font-sans text-[0.95rem] leading-relaxed text-justify text-muted-foreground">{hero.body}</p>
+          <p className="mt-4 font-sans text-[0.95rem] leading-relaxed text-left sm:text-justify [hyphens:auto] text-muted-foreground">{hero.body}</p>
 
           <div className="mt-6 border border-foreground p-4 bg-muted/20">
             <div className="text-xs uppercase tracking-wider font-bold mb-3 text-center font-serif">Career Highlights</div>
