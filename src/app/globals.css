@@ -1,0 +1,422 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens                                                       */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-sepia: var(--sepia);
+  --color-ember: var(--ember);
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-baskerville), Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-typewriter: var(--font-courier), ui-monospace, monospace;
+  --font-hand: var(--font-kalam), cursive;
+  --font-caveat: var(--font-caveat-face), cursive;
+  --font-cursive: var(--font-dancing), cursive;
+  --font-pen: var(--font-pinyon), cursive;
+  --font-pencil: var(--font-belle-aurore), cursive;
+  --font-worn: var(--font-special-elite), ui-monospace, monospace;
+  --font-arabic: var(--font-amiri), serif;
+  --font-grotesk: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-ken-burns: ken-burns 18s ease-in-out infinite alternate;
+  --animate-stamp-in: stampIn 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+:root {
+  --background: #f4eee0;
+  --foreground: #120805;
+  --card: #fbf6ea;
+  --muted: #ebe3d1;
+  --muted-foreground: #555;
+  --accent: #efe7d6;
+  --primary: #171717;
+  --border: #d8cdb8;
+  --sepia: #704214;
+  --ember: #e07a1f;
+
+  /* Evidence Locker palette (light). Dark overrides live under .dark. */
+  --void: #f2ece0;
+  --leather-900: #130b06;
+  --leather-800: #20160e;
+  --leather-700: #2e2117;
+  --panel-900: #e7ddca;
+  --panel-800: #dccfba;
+  --panel-700: #cebfa6;
+  --parchment-100: #f0deb7;
+  --parchment-200: #ead09e;
+  --parchment-300: #dbba84;
+  --manila-400: #d0ab73;
+  --manila-500: #b99360;
+  --ink-900: #302016;
+  --ink-600: #5e4f43;
+  --ink-400: #6d6155;
+  --ink-inv-900: #35251b;
+  --ink-inv-600: #544438;
+  --ink-inv-400: #5e5043;
+  --gilt: #73542e;
+  --rust: #923719;
+  --amber: #9a4900;
+  --print-ink: #2c2216;
+  --print-ink-soft: #5c4a31;
+  --print-ink-faint: #8b7754;
+
+  --ease-paper: cubic-bezier(0.22, 0.68, 0.28, 1);
+  --ease-mechanism: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-page: 0.46s;
+  --dur-card: 0.32s;
+  --dur-latch: 0.2s;
+
+  /* Generated textures: zero bytes over the wire, seamless via stitchTiles. */
+  --tex-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.1' intercept='-0.55'/%3E%3CfeFuncG type='linear' slope='2.1' intercept='-0.55'/%3E%3CfeFuncB type='linear' slope='2.1' intercept='-0.55'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23f)'/%3E%3C/svg%3E");
+  --tex-hide: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='h'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.22' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='1.6' intercept='-0.25'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23h)'/%3E%3C/svg%3E");
+  --tex-foxing: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='x'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0.3 0.6'/%3E%3C/feComponentTransfer%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.30 0 0 0 0 0.14 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23x)'/%3E%3C/svg%3E");
+  --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #f4eee0;
+  --card: #141210;
+  --muted: #262626;
+  --muted-foreground: #a1a1a1;
+  --accent: #1d1b18;
+  --primary: #e5e5e5;
+  --border: #ffffff1f;
+  --sepia: #c7955a;
+
+  --void: #0a0a0a;
+  --panel-900: #131313;
+  --panel-800: #171717;
+  --panel-700: #262626;
+  --ink-inv-900: #f4eee0;
+  --ink-inv-600: #b1b1b1;
+  --ink-inv-400: #868686;
+  --gilt: #a29070;
+  --amber: #d38c49;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-padding-top: 100px;
+  scrollbar-width: thin;
+  scrollbar-color: #92400e4d #fffbeb80;
+}
+.dark {
+  scrollbar-color: #fde68a33 #0c0a0980;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-baskerville), Georgia, serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-amber-100);
+  color: var(--color-amber-900);
+}
+.dark ::selection {
+  background-color: color-mix(in oklab, var(--color-amber-900) 90%, transparent);
+  color: var(--color-amber-100);
+}
+
+/* The intro splash hides the page until it has played once per day. */
+html[data-intro] body > *:not([data-intro-layer]) {
+  visibility: hidden;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Type utilities                                                     */
+/* ------------------------------------------------------------------ */
+
+.type-label {
+  font-family: var(--font-typewriter);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+}
+
+.stencil {
+  color: var(--rust);
+  text-shadow: 0 0 1px color-mix(in oklab, var(--rust) 45%, transparent);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.engraved {
+  color: var(--ink-inv-900);
+  text-shadow: 0 1px 1px #000000a6;
+}
+
+.letterpress {
+  color: var(--ink-900);
+  text-shadow: 0 1px #fff6dc61;
+  opacity: 0.94;
+}
+
+.gilt-rule {
+  color: var(--gilt);
+  align-items: center;
+  gap: 0.75rem;
+  display: flex;
+}
+.gilt-rule::before,
+.gilt-rule::after {
+  content: "";
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--gilt) 72%, transparent) 18%,
+    color-mix(in oklab, var(--gilt) 72%, transparent) 82%,
+    transparent
+  );
+  flex: 1;
+  height: 1px;
+}
+
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 3.6rem;
+  line-height: 0.8;
+  margin: 0.3rem 0.6rem 0 0;
+  color: var(--foreground);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Torch secrets                                                      */
+/* ------------------------------------------------------------------ */
+
+.torch-secret {
+  pointer-events: none;
+  z-index: 3;
+  max-width: 15rem;
+  transition: opacity 0.22s ease-out;
+  position: absolute;
+}
+.torch-secret__hand {
+  font-family: var(--font-hand);
+  color: color-mix(in oklab, var(--ink-900) 78%, var(--rust));
+  text-shadow: 0 0 6px color-mix(in oklab, var(--amber) 30%, transparent);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+.dark .torch-secret__hand {
+  color: color-mix(in oklab, #f4eee0 80%, var(--amber));
+}
+.torch-secret__stamp {
+  font-family: var(--font-typewriter);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  border: 1px solid color-mix(in oklab, var(--rust) 55%, transparent);
+  width: fit-content;
+  margin-top: 0.25rem;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.5rem;
+  display: block;
+  transform: rotate(-3deg);
+}
+.dark .torch-secret__stamp {
+  color: #e2875f;
+  border-color: #e2875f88;
+}
+
+/* ------------------------------------------------------------------ */
+/*  The surface recipe: fill, fibre grain, mottling, edge burn, lift   */
+/* ------------------------------------------------------------------ */
+
+.surface {
+  isolation: isolate;
+  transform: rotate(var(--surface-tilt, 0deg));
+  position: relative;
+}
+.surface[data-contain="true"] {
+  contain: paint;
+}
+.surface__sheet {
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--surface-fill, var(--parchment-200));
+  border-radius: var(--surface-radius, 2px);
+  box-shadow: inset 0 0 var(--surface-burn-size, 44px) var(--surface-burn, #4e30103d);
+  position: absolute;
+  inset: 0;
+}
+.surface__sheet::before {
+  content: "";
+  border-radius: inherit;
+  background-image: var(--surface-grain, var(--tex-fibre));
+  background-size: var(--surface-grain-size, 240px);
+  background-position: var(--surface-grain-x, 0) var(--surface-grain-y, 0);
+  mix-blend-mode: overlay;
+  opacity: var(--surface-grain-opacity, 0.24);
+  position: absolute;
+  inset: 0;
+}
+.surface__sheet::after {
+  content: "";
+  border-radius: inherit;
+  background-image:
+    radial-gradient(ellipse 55% 42% at var(--surface-mottle-x, 20%) var(--surface-mottle-y, 14%), var(--surface-stain, #70481a1a), transparent 70%),
+    radial-gradient(ellipse 68% 50% at calc(100% - var(--surface-mottle-x, 20%)) calc(100% - var(--surface-mottle-y, 14%)), var(--surface-stain, #603c161c), transparent 72%),
+    radial-gradient(ellipse 116% 90% at 50% 50%, transparent 70%, var(--surface-vignette, #54341233));
+  mix-blend-mode: multiply;
+  opacity: var(--surface-mottle-opacity, 1);
+  position: absolute;
+  inset: 0;
+}
+.surface__content {
+  z-index: 1;
+  position: relative;
+}
+.surface[data-lift="soft"] {
+  box-shadow: 0 6px 18px -10px #140c048c;
+}
+.surface[data-lift="raised"] {
+  box-shadow: 0 12px 30px -12px #140c049e, 0 2px 6px -2px #140c0466;
+}
+.surface[data-lift="deep"] {
+  box-shadow: 0 26px 54px -20px #0c0702bf, 0 4px 10px -4px #140c0473;
+}
+.surface[data-variant="parchment"] {
+  --surface-fill: var(--parchment-200);
+}
+.surface[data-variant="parchment-light"] {
+  --surface-fill: var(--parchment-100);
+  --surface-grain-opacity: 0.26;
+  --surface-vignette: #54341224;
+}
+.surface[data-variant="manila"] {
+  --surface-fill: var(--manila-400);
+  --surface-grain-opacity: 0.38;
+  --surface-stain: #603c1621;
+}
+.surface[data-variant="leather"] {
+  --surface-fill: var(--leather-800);
+  --surface-grain: var(--tex-hide);
+  --surface-grain-size: 200px;
+  --surface-grain-opacity: 0.5;
+  --surface-burn: #000000b3;
+  --surface-burn-size: 90px;
+  --surface-stain: #00000040;
+  --surface-vignette: #00000080;
+}
+.surface[data-variant="void"] {
+  --surface-fill: var(--void);
+  --surface-grain: var(--tex-hide);
+  --surface-grain-opacity: 0.28;
+  --surface-burn: #000000d9;
+  --surface-stain: #0000004d;
+  --surface-vignette: #0000008c;
+}
+.surface[data-variant="index-card"] {
+  --surface-fill: var(--parchment-100);
+  --surface-grain-opacity: 0.24;
+  --surface-burn-size: 26px;
+  --surface-vignette: #5434121f;
+  --surface-radius: 1px;
+}
+.surface[data-edge="deckle"] {
+  box-shadow: none;
+  filter: drop-shadow(0 8px 14px #140c0480);
+}
+.surface[data-edge="deckle"] .surface__sheet {
+  filter: url(#edge-deckle);
+}
+.surface[data-edge="torn"] {
+  box-shadow: none;
+  filter: drop-shadow(0 10px 16px #140c048c);
+}
+.surface[data-edge="torn"] .surface__sheet {
+  filter: url(#edge-torn);
+}
+.surface[data-foxed="true"] .surface__sheet {
+  background-image: var(--tex-foxing);
+  background-size: 320px;
+  background-position: var(--surface-grain-x, 0) var(--surface-grain-y, 0);
+  background-blend-mode: multiply;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Motion                                                             */
+/* ------------------------------------------------------------------ */
+
+@keyframes marquee {
+  0% { transform: translate(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+@keyframes marquee-vertical {
+  0% { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  to { transform: scale(1.14); }
+}
+@keyframes stampIn {
+  0% { opacity: 0; transform: scale(0.2) rotate(var(--stamp-rot, -8deg)); }
+  50% { opacity: 0.9; transform: scale(1.3) rotate(var(--stamp-rot, -8deg)); }
+  70% { transform: scale(0.9) rotate(var(--stamp-rot, -8deg)); }
+  to { opacity: 0.75; transform: scale(1) rotate(var(--stamp-rot, -8deg)); }
+}
+@keyframes flash {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes after-glow {
+  0% { opacity: 0.8; }
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+@keyframes disc-spin {
+  to { transform: rotate(360deg); }
+}
