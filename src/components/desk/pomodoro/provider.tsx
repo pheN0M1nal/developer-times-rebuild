@@ -85,7 +85,7 @@ function reducer(state: State, a: Action): State {
     case "SET_PHASE":
       return { ...state, phase: a.phase, running: false, endsAt: null, remaining: phaseLength(a.phase) };
     case "OPEN":
-      return { ...state, active: true, expanded: true };
+      return { ...state, expanded: true };
     case "MINIMIZE":
       return { ...state, expanded: false };
     case "CLOSE":

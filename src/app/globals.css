@@ -499,3 +499,27 @@ html.lenis body {
     linear-gradient(90deg, transparent 0 calc(50% - 26px), #00000040 calc(50% - 4px), #0000006a 50%, #00000040 calc(50% + 4px), transparent calc(50% + 26px)),
     transparent;
 }
+
+@keyframes pomodoro-pendulum {
+  from { transform: rotate(-14deg); }
+  to { transform: rotate(14deg); }
+}
+@keyframes pomodoro-blob {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(40px, -30px) scale(1.25); }
+}
+
+@media print {
+  #site-header,
+  #site-footer,
+  [data-header-spacer] {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .stationer-sheet {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+}

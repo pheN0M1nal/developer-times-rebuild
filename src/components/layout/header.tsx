@@ -127,6 +127,7 @@ export function Header() {
   return (
     <>
       <header
+        id="site-header"
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-colors duration-300 px-4 sm:px-8",
           scrolled ? "bg-background/90 backdrop-blur-sm border-b border-foreground/10" : "bg-transparent",

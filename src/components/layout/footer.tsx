@@ -6,7 +6,7 @@ import { footer, persona } from "@/content/site";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-16 border-t border-foreground/15 bg-foreground/[0.02]">
+    <footer id="site-footer" className="mt-16 border-t border-foreground/15 bg-foreground/[0.02]">
       <div className="max-w-4xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="space-y-1">
