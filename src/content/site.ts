@@ -11,6 +11,8 @@ export const persona = {
   linkedin: { label: "linkedin.com/in/ezra-quill", href: "https://www.linkedin.com/" },
   github: "https://github.com/",
   resume: "/resume/ezra-quill-resume.pdf",
+  /** A Formspree-style endpoint for endorsement submissions. Empty = fall back to email. */
+  formEndpoint: "",
   years: 6,
   established: { year: 2019, roman: "MMXIX" },
   volume: "V",

@@ -6,18 +6,9 @@
 /*  Theme tokens                                                       */
 /* ------------------------------------------------------------------ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-card: var(--card);
-  --color-primary: var(--primary);
-  --color-sepia: var(--sepia);
-  --color-ember: var(--ember);
-
+/* Font stacks are emitted on :root, where next/font's variables live
+   (the font classes sit on <html>), so plain CSS can use them too. */
+@theme {
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-sans: var(--font-baskerville), Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -30,6 +21,20 @@
   --font-worn: var(--font-special-elite), ui-monospace, monospace;
   --font-arabic: var(--font-amiri), serif;
   --font-grotesk: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-sepia: var(--sepia);
+  --color-ember: var(--ember);
+
 
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
