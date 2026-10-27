@@ -1,0 +1,44 @@
+<Figure src="/images/scenes/desk-lamp.jpg" alt="A desk lamp over a sheet of paper" caption="Figure 1 — The desk, after hours" />
+
+## Filed Report
+
+The scene opens on a crowded boulevard of websites: flashing gradients, spinning widgets, hero sections that shout over one another. I did not want to be another voice in that noise. I wanted something that felt like the paper folded on a café table — calm type, honest structure, ink instead of glitter.
+
+<PullQuote>Keep the page quiet. Let the curious find the rest.</PullQuote>
+
+## Evidence: The Pressroom
+
+The brief I wrote myself was short. Every section is a column. Every heading is a headline. Nothing moves unless it has a reason to, and nothing glows unless you ask it to. The masthead sets the tone; the rules between sections do the rest of the work.
+
+The paper itself is not an image. Each sheet is five layers: a flat fill, a fibre grain made from an SVG noise filter, a pair of oversized stains blended with multiply, an inset shadow for the burnt edge, and a warm drop shadow so it lifts off the desk.
+
+```css
+.surface__sheet {
+  background-color: var(--surface-fill);
+  box-shadow: inset 0 0 44px var(--surface-burn);
+}
+.surface__sheet::before { /* fibre grain */ mix-blend-mode: overlay; }
+.surface__sheet::after { /* mottling */ mix-blend-mode: multiply; }
+```
+
+<Evidence title="Exhibit B · Seeded variation">
+
+Tilt, grain offset and stain position all come from a hash of each sheet's id. Use `Math.random()` at render time and the server and the browser disagree; use a hash and every visitor sees the same slightly crooked card.
+
+</Evidence>
+
+## Evidence: The Torch
+
+Switch to the night edition and a <Underline>torch</Underline> appears in the header. Light it and it follows the cursor, uncovering notes pencilled in the margins. Hold the beam on one long enough and it is filed as found — and something in the Evidence Locker unseals.
+
+The beam is five stacked radial gradients. The first is a dark mask with a clear centre; three warm glows sit on top with `mix-blend-mode: screen`; the last softens the edge. The cursor position goes into two CSS variables inside `requestAnimationFrame`, so React never re-renders while you sweep.
+
+## Findings
+
+- Every page is a static file. There is no server to keep alive.
+- Every sound you hear is synthesised in the browser; no audio files ship for effects.
+- The desk tools work offline once the page has loaded.
+
+## Closing Note
+
+A portfolio is a strange object: a résumé that wants to be a place. This one tries to be a good newspaper first and a clever toy second. If you found the torch, you already know which part I enjoyed building more.

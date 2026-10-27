@@ -212,6 +212,7 @@ html.lenis body {
   height: 1px;
 }
 
+.article-body h2:first-of-type + p::first-letter,
 .drop-cap::first-letter {
   float: left;
   font-family: var(--font-serif);

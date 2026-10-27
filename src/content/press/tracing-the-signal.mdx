@@ -1,0 +1,39 @@
+<Figure src="/images/scenes/rain-street.jpg" alt="Street lamps in the rain" caption="Figure 1 — The beat, after dark" />
+
+## The Lead
+
+A sporadic failure whispered across the logs: a tracking page that froze for a few seconds, once or twice an hour, and never while anyone was watching. Too quick to catch, too costly to ignore.
+
+<PullQuote>Bugs hide in timing. Make time visible.</PullQuote>
+
+## Method
+
+<Evidence title="Instrumentation">
+
+We added trace spans around every step between a courier's phone and the customer's screen, and widened sampling at the edges where messages entered and left the system.
+
+</Evidence>
+
+- Isolate the concurrency hotspots
+- Record queue depth every second, not every minute
+- Put the same clock on every machine before trusting any timestamp
+
+## The Break
+
+The traces lined up at rush hour. Couriers' phones, coming back into signal, sent their buffered pings all at once. The fan-out dutifully delivered every single one, in order, to every open page — a minute of history replayed in two seconds.
+
+```ts
+// Keep only the newest ping per courier before fanning out.
+const latest = new Map<string, Ping>();
+for (const ping of batch) latest.set(ping.courierId, ping);
+broadcast([...latest.values()]);
+```
+
+## Findings
+
+- The freeze was never a crash. It was a queue doing exactly what it was told.
+- Coalescing pings removed the stalls and cut message volume by a factor of six.
+
+## Closing Note
+
+The hardest bugs are the polite ones. They do nothing wrong; they just do everything at once.

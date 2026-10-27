@@ -27,9 +27,9 @@ export function ClassifiedStamp({ className = "" }: { className?: string }) {
 }
 
 /** A folder print: drawn exhibit, grain, corner marks, a classified stamp. */
-export function CaseCard({ c }: { c: CaseFile }) {
+export function CaseCard({ c, className = "w-[300px] sm:w-[320px] shrink-0" }: { c: CaseFile; className?: string }) {
   return (
-    <article className="group w-[300px] sm:w-[320px] shrink-0 border border-foreground/20 bg-background p-3 shadow-[0_6px_18px_-10px_#140c048c] transition-transform duration-300 hover:-translate-y-1">
+    <article className={`group ${className} border border-foreground/20 bg-background p-3 shadow-[0_6px_18px_-10px_#140c048c] transition-transform duration-300 hover:-translate-y-1`}>
       <Link href={`/cases/${c.id}/`} className="block">
         <div className="relative aspect-[4/3] overflow-hidden border border-foreground/10 text-foreground">
           <ExhibitMock kind={c.exhibit} className="h-full w-full sepia-[0.35] dark:sepia-0 transition-transform duration-500 group-hover:scale-[1.03]" />

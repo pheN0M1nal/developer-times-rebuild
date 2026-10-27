@@ -1,0 +1,43 @@
+<Figure src="/images/scenes/venetian-blinds.jpg" alt="Light through venetian blinds on an office wall" caption="Figure 1 — The office, 2:14 AM" />
+
+## Initial Report
+
+The call came in at quarter-end. The finance team had closed the books, opened them again, and closed them a second time. The balance was off by an amount small enough to ignore and large enough that nobody could.
+
+It balanced on Tuesdays. Nobody could say why.
+
+## Evidence: The Duplicates
+
+The first suspect was easy to find once we looked. A payment provider retried a webhook after a timeout; our handler had already paid the supplier, and paid them again. Two rows, same amount, same minute.
+
+```ts
+// Before: the handler trusted the provider to call once.
+await payouts.create({ supplierId, amount });
+
+// After: the provider's event id is the idempotency key.
+await payouts.createOnce(event.id, { supplierId, amount });
+```
+
+<Evidence title="Exhibit B · The outbox">
+
+Every call to a provider is first written to an outbox table in the same transaction as the ledger entry. A worker sends it and marks it done. If the worker dies halfway, it tries again — and the provider, given the same key, does nothing twice.
+
+</Evidence>
+
+## Evidence: The Tuesday Problem
+
+The Tuesday pattern was the clever one. Our exchange rates came from a feed that refreshed once a day. Charges were captured in one currency and settled in another, usually a day later. We applied the rate at settlement. On Tuesdays — the provider's batch day — capture and settlement happened within the same rate window, so the numbers agreed.
+
+<PullQuote>The rate is part of the evidence. Record it when the money moves, not when it lands.</PullQuote>
+
+The fix was to store the rate, and its source, at capture. Any difference at settlement became its own ledger line: an FX gain or loss, visible and explainable, instead of a rounding ghost.
+
+## Findings
+
+- Duplicate payouts: none since the outbox shipped.
+- The Tuesday pattern disappeared the day rates were captured with the charge.
+- Ninety-two per cent of bank lines now match automatically. The rest wait in a review queue with a reason attached.
+
+## Closing Note
+
+Most reconciliation bugs are not arithmetic. They are stories told in the wrong order. Write the story down in the order it happened, and the numbers usually agree with you.
